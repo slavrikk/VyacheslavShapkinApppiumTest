@@ -1,15 +1,68 @@
 package scenarios;
 
+import bean.DataBean;
+import io.appium.java_client.imagecomparison.SimilarityMatchingOptions;
+import io.appium.java_client.imagecomparison.SimilarityMatchingResult;
+import org.apache.commons.codec.binary.Base64;
+import org.openqa.selenium.OutputType;
 import org.testng.annotations.Test;
+import pageObjects.BudgetPage;
+import pageObjects.RegisterPage;
 import setup.BaseTest;
+import setup.DataProvider;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class nativeMobileTests extends BaseTest {
 
-    @Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
-    public void simpleNativeTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+
+      /*
+      On the decision of bonus task, I chose the solution of comparing screenshots until and after click on button.
+      I have found this on the appium documentation (https://appium.io/docs/en/writing-running-appium/image-comparison/)
+      But this method require additional npm module as 'opencv4nodejs'. I have installed it but the exception is appearing anyway.
+      Could you clarify, this decision is convenient or not?
+       */
+
+      @Test(priority = 1, groups = {"native"}, description = "This simple test just click on the Sign In button")
+      public void simpleNativeTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+
+        byte[] screenshot1 = Base64.encodeBase64(getDriver().getScreenshotAs(OutputType.BYTES));
+
         getPo().getWelement("signInBtn").click();
-        System.out.println("Simplest Android native test done");
 
-    }
+        byte[] screenshot2 = Base64.encodeBase64(getDriver().getScreenshotAs(OutputType.BYTES));
 
+        SimilarityMatchingResult result = getDriver()
+                .getImagesSimilarity(screenshot1, screenshot2, new SimilarityMatchingOptions()
+                        .withEnabledVisualization());
+
+
+        assertThat(result.getVisualization().length).isGreaterThan(0);
+        assertThat(result.getScore()).isGreaterThan(0.0);
+          System.out.println("Simplest Android native test done");
+
+      }
+
+  @Test(priority = 2,
+      groups = {"native"},
+      description = "Register and Login assert",
+      dataProviderClass = DataProvider.class,
+      dataProvider = "data")
+  public void registerAndLoginTest(DataBean data) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    getPo().getWelement("registerBtn").click();
+    RegisterPage registerPage = getPo().getNativeRegisterPage("registerPage");
+    registerPage.register(data.getEmail(), data.getUserName(), data.getPassword());
+    getPo().getWelement("inputLogin").sendKeys(data.getEmail());
+    getPo().getWelement("inputPassword").sendKeys(data.getPassword());
+    getPo().getWelement("signInBtn").click();
+    BudgetPage budgetPage = getPo().getNativeBudgetPage("budgetPage");
+
+    String actual = budgetPage.getBudgetActivity().getText();
+
+    assertThat(actual).isEqualTo(budgetPage.getHeader());
+    assertThat(budgetPage.getBudgetActivity().isEnabled()).isEqualTo(true);
+
+    System.out.println("Register and Login assert native test done");
+  }
+  
 }

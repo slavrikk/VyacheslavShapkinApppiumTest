@@ -34,4 +34,27 @@ public class PageObject implements IPageObject {
         return (WebElement) field.get(somePageObject);
 
     }
+
+    @Override
+    public RegisterPage getNativeRegisterPage(String name) throws NoSuchFieldException, IllegalAccessException {
+        Field field = somePageObject.getClass().getDeclaredField(name);
+        field.setAccessible(true);
+        return (RegisterPage) field.get(somePageObject);
+    }
+
+    @Override
+    public BudgetPage getNativeBudgetPage(String name) throws NoSuchFieldException, IllegalAccessException {
+        Field field = somePageObject.getClass().getDeclaredField(name);
+        field.setAccessible(true);
+        return (BudgetPage) field.get(somePageObject);
+    }
+
+    @Override
+    public GooglePage getGooglePage(String name) throws NoSuchFieldException, IllegalAccessException {
+        Field field = somePageObject.getClass().getDeclaredField(name);
+        field.setAccessible(true);
+        return (GooglePage) field.get(somePageObject);
+    }
+
+
 }

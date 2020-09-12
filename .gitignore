@@ -1,0 +1,11 @@
+target/
+*.iml
+.idea/
+.allure/
+.idea/workspace.xml
+**/allure-results
+.idea/misc.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+/allure-results
+.idea/**/workspace.xml
