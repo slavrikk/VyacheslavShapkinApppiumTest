@@ -19,7 +19,7 @@ public class nativeMobileTests extends BaseTest {
       /*
       On the decision of bonus task, I chose the solution of comparing screenshots until and after click on button.
       I have found this on the appium documentation (https://appium.io/docs/en/writing-running-appium/image-comparison/)
-      But this method require additional npm module as 'opencv4nodejs'. I have installed it but the exception is appearing anyway.
+      But this method required additional npm module as 'opencv4nodejs'. I have installed it but the exception is appearing anyway.
       Could you clarify, this decision is convenient or not?
        */
 
