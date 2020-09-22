@@ -23,9 +23,12 @@ public class nativeMobileTests extends BaseTest {
       Could you clarify, this decision is convenient or not?
        */
 
+
       @Test(priority = 1, groups = {"native"}, description = "This simple test just click on the Sign In button")
       public void simpleNativeTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
 
+        getPo().getWelement("signInBtn").click();
+        /*
         byte[] screenshot1 = Base64.encodeBase64(getDriver().getScreenshotAs(OutputType.BYTES));
 
         getPo().getWelement("signInBtn").click();
@@ -39,9 +42,12 @@ public class nativeMobileTests extends BaseTest {
 
         assertThat(result.getVisualization().length).isGreaterThan(0);
         assertThat(result.getScore()).isGreaterThan(0.0);
+
+         */
           System.out.println("Simplest Android native test done");
 
       }
+
 
   @Test(priority = 2,
       groups = {"native"},

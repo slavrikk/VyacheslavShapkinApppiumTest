@@ -38,9 +38,9 @@ public class webMobileTests extends BaseTest {
       googlePage.open();
 
       googlePage.getInputField().sendKeys("EPAM");
-      googlePage.getInputField().sendKeys(Keys.ENTER);
+      googlePage.getInputField().submit();
 
-       assertThat(googlePage.getFoundInformation()).isNotEmpty();
+       assertThat(googlePage.getFoundInformation()).hasSizeGreaterThan(2);
 
     }
 

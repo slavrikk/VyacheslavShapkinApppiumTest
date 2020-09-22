@@ -37,7 +37,8 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>
+                        <ts.appium>https://vyacheslav130:uqY9PfiQK4eExpp1QLz5@hub-cloud.browserstack.com/wd/hub</ts.appium>
+                       <!-- <ts.appium>http://localhost:4723/wd/hub</ts.appium> -->
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -72,6 +73,38 @@
                 <suite.file>./src/test/resources/webTNG.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>web-cloud-android</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudAndroidWeb.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>web-cloud-ios</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudiOSWeb.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>native-cloud-android</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudAndroidNative.xml</suite.file>
+            </properties>
+        </profile>
+
+
     </profiles>
 
 
