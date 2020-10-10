@@ -10,6 +10,7 @@ import pageObjects.BudgetPage;
 import pageObjects.RegisterPage;
 import setup.BaseTest;
 import setup.DataProvider;
+import setup.TypePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,12 +51,12 @@ public class nativeMobileTests extends BaseTest {
       dataProvider = "data")
   public void registerAndLoginTest(DataBean data) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
     getPo().getWelement("registerBtn").click();
-    RegisterPage registerPage = getPo().getNativeRegisterPage("registerPage");
+    RegisterPage registerPage = (RegisterPage) getPo().getPage(TypePage.NATIVE,"registerPage");
     registerPage.register(data.getEmail(), data.getUserName(), data.getPassword());
     getPo().getWelement("inputLogin").sendKeys(data.getEmail());
     getPo().getWelement("inputPassword").sendKeys(data.getPassword());
     getPo().getWelement("signInBtn").click();
-    BudgetPage budgetPage = getPo().getNativeBudgetPage("budgetPage");
+    BudgetPage budgetPage = (BudgetPage) getPo().getPage(TypePage.WEB,"budgetPage");
 
     String actual = budgetPage.getBudgetActivity().getText();
 

@@ -6,7 +6,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class BudgetPage implements Pages{
+public class BudgetPage implements Page {
 
   @AndroidFindBy(
       xpath =

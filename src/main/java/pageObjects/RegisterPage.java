@@ -6,7 +6,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterPage implements Pages{
+public class RegisterPage implements Page {
 
   @AndroidFindBy(id = "platkovsky.alexey.epamtestapp:id/registration_email")
   WebElement inputEmail;

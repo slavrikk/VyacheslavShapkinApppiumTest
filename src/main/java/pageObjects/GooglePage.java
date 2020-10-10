@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class GooglePage implements Pages{
+public class GooglePage implements Page {
 
   @FindBy(xpath = "//input[@name='q']")
   private WebElement inputField;

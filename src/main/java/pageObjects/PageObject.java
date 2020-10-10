@@ -40,7 +40,7 @@ public class PageObject implements IPageObject {
     }
 
    @Override
-   public Pages getPage(TypePage typePage, String namePage) throws NoSuchFieldException, IllegalAccessException {
+   public Page getPage(TypePage typePage, String namePage) throws NoSuchFieldException, IllegalAccessException {
         if(typePage.equals(NATIVE)){
             Field field = somePageObject.getClass().getDeclaredField(namePage);
             field.setAccessible(true);
@@ -52,7 +52,7 @@ public class PageObject implements IPageObject {
                 default: throw new NoSuchFieldException();
             }
         }
-        else  {
+        if (typePage.equals(WEB)){
             Field field = somePageObject.getClass().getDeclaredField(namePage);
             field.setAccessible(true);
             switch (namePage){
@@ -61,28 +61,9 @@ public class PageObject implements IPageObject {
                 default: throw new NoSuchFieldException();
             }
         }
+        else {
+            return null;
+        }
    }
-
-    @Override
-    public RegisterPage getNativeRegisterPage(String name) throws NoSuchFieldException, IllegalAccessException {
-        Field field = somePageObject.getClass().getDeclaredField(name);
-        field.setAccessible(true);
-        return (RegisterPage) field.get(somePageObject);
-    }
-
-    @Override
-    public BudgetPage getNativeBudgetPage(String name) throws NoSuchFieldException, IllegalAccessException {
-        Field field = somePageObject.getClass().getDeclaredField(name);
-        field.setAccessible(true);
-        return (BudgetPage) field.get(somePageObject);
-    }
-
-    @Override
-    public GooglePage getGooglePage(String name) throws NoSuchFieldException, IllegalAccessException {
-        Field field = somePageObject.getClass().getDeclaredField(name);
-        field.setAccessible(true);
-        return (GooglePage) field.get(somePageObject);
-    }
-
 
 }
