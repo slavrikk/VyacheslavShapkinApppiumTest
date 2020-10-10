@@ -7,7 +7,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterPage {
+public class RegisterPage implements Page {
 
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@value='user@example.com']")
   @AndroidFindBy(id = "platkovsky.alexey.epamtestapp:id/registration_email")

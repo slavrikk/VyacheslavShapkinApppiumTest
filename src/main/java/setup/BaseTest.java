@@ -17,9 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest implements IDriver {
 
-  public static String userName = "vyacheslav130";
-  public static String accessKey = "uqY9PfiQK4eExpp1QLz5";
-
   private static AppiumDriver appiumDriver; // singleton
   IPageObject po;
 
@@ -85,9 +82,7 @@ public class BaseTest implements IDriver {
     capabilities.setCapability("chromedriverDisableBuildCheck", "true");
 
     try {
-
-        appiumDriver= new AppiumDriver(new URL("https://"+userName+":"+accessKey+"@hub-cloud.browserstack.com/wd/hub"), capabilities);
-     // appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
+        appiumDriver= new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }

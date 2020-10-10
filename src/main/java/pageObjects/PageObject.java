@@ -3,8 +3,12 @@ package pageObjects;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import setup.IPageObject;
+import setup.TypePage;
 
 import java.lang.reflect.Field;
+
+import static setup.TypePage.NATIVE;
+import static setup.TypePage.WEB;
 
 public class PageObject implements IPageObject {
 
@@ -12,19 +16,19 @@ public class PageObject implements IPageObject {
 
     public PageObject(String appType, AppiumDriver appiumDriver) throws Exception {
 
-        System.out.println("Current app type: "+appType);
-        switch(appType){
+        System.out.println("Current app type: " + appType);
+        switch (appType) {
             case "web":
                 somePageObject = new WebPageObject(appiumDriver);
                 break;
             case "native":
                 somePageObject = new NativePageObject(appiumDriver);
                 break;
-            default: throw new Exception("Can't create a page object for "+appType);
+            default:
+                throw new Exception("Can't create a page object for " + appType);
         }
 
     }
-
 
     @Override
     public WebElement getWelement(String weName) throws NoSuchFieldException, IllegalAccessException {
@@ -36,25 +40,32 @@ public class PageObject implements IPageObject {
     }
 
     @Override
-    public RegisterPage getNativeRegisterPage(String name) throws NoSuchFieldException, IllegalAccessException {
-        Field field = somePageObject.getClass().getDeclaredField(name);
-        field.setAccessible(true);
-        return (RegisterPage) field.get(somePageObject);
+    public Page getPage(TypePage typePage, String namePage) throws NoSuchFieldException, IllegalAccessException {
+        Field field;
+
+        if (typePage.equals(NATIVE)) {
+            field = somePageObject.getClass().getDeclaredField(namePage);
+            field.setAccessible(true);
+            switch (namePage) {
+                case "registerPage":
+                    return (RegisterPage) field.get(somePageObject);
+                case "budgetPage":
+                    return (BudgetPage) field.get(somePageObject);
+                default:
+                    throw new NoSuchFieldException();
+            }
+        } if(typePage.equals(WEB)) {
+            field = somePageObject.getClass().getDeclaredField(namePage);
+            field.setAccessible(true);
+            switch (namePage) {
+                case "googlePage":
+                    return (GooglePage) field.get(somePageObject);
+                default:
+                    throw new NoSuchFieldException();
+            }
+        }
+        else {
+            return null;
+        }
     }
-
-    @Override
-    public BudgetPage getNativeBudgetPage(String name) throws NoSuchFieldException, IllegalAccessException {
-        Field field = somePageObject.getClass().getDeclaredField(name);
-        field.setAccessible(true);
-        return (BudgetPage) field.get(somePageObject);
-    }
-
-    @Override
-    public GooglePage getGooglePage(String name) throws NoSuchFieldException, IllegalAccessException {
-        Field field = somePageObject.getClass().getDeclaredField(name);
-        field.setAccessible(true);
-        return (GooglePage) field.get(somePageObject);
-    }
-
-
 }

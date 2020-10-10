@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import pageObjects.GooglePage;
 import setup.BaseTest;
+import setup.TypePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +34,7 @@ public class webMobileTests extends BaseTest {
     @Test(priority = 2, groups = {"web"}, description = "Make sure that we've searched EPAM in google and result is not empty list")
     public void googleEpamTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException, InterruptedException {
 
-      GooglePage googlePage =  getPo().getGooglePage("googlePage");
+      GooglePage googlePage = (GooglePage) getPo().getPage(TypePage.WEB,"googlePage");
 
       googlePage.open();
 

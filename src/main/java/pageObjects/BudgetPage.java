@@ -7,7 +7,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class BudgetPage {
+public class BudgetPage implements Page {
 
   @AndroidFindBy(
       xpath =

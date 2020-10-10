@@ -1,21 +1,13 @@
 package setup;
 
 import org.openqa.selenium.WebElement;
-import pageObjects.BudgetPage;
-import pageObjects.GooglePage;
-import pageObjects.RegisterPage;
+import pageObjects.Page;
 
 
 public interface IPageObject {
 
     WebElement getWelement(String weName) throws NoSuchFieldException, IllegalAccessException, InstantiationException;
 
-    RegisterPage getNativeRegisterPage(String name) throws NoSuchFieldException, IllegalAccessException;
-
-    BudgetPage getNativeBudgetPage(String name) throws NoSuchFieldException, IllegalAccessException;
-
-    GooglePage getGooglePage(String name) throws NoSuchFieldException, IllegalAccessException;
-
-
+    Page getPage(TypePage typePage, String namePage) throws NoSuchFieldException, IllegalAccessException;
 
 }

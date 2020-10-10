@@ -7,6 +7,9 @@
     <groupId>com.epam.mtat</groupId>
     <artifactId>mobileTaTrainingV2</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <accesskey>uqY9PfiQK4eExpp1QLz5</accesskey>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -37,7 +40,7 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>https://vyacheslav130:uqY9PfiQK4eExpp1QLz5@hub-cloud.browserstack.com/wd/hub</ts.appium>
+                        <ts.appium>https://vyacheslav130:${accesskey}@hub-cloud.browserstack.com/wd/hub</ts.appium>
                        <!-- <ts.appium>http://localhost:4723/wd/hub</ts.appium> -->
                     </systemPropertyVariables>
                 </configuration>
