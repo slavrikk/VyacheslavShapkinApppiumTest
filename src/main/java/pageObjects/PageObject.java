@@ -3,8 +3,12 @@ package pageObjects;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import setup.IPageObject;
+import setup.TypePage;
 
 import java.lang.reflect.Field;
+
+import static setup.TypePage.NATIVE;
+import static setup.TypePage.WEB;
 
 public class PageObject implements IPageObject {
 
@@ -34,6 +38,30 @@ public class PageObject implements IPageObject {
         return (WebElement) field.get(somePageObject);
 
     }
+
+   @Override
+   public Pages getPage(TypePage typePage, String namePage) throws NoSuchFieldException, IllegalAccessException {
+        if(typePage.equals(NATIVE)){
+            Field field = somePageObject.getClass().getDeclaredField(namePage);
+            field.setAccessible(true);
+            switch (namePage){
+                case "registerPage":
+                    return (RegisterPage) field.get(somePageObject);
+                case "budgetPage":
+                    return (BudgetPage) field.get(somePageObject);
+                default: throw new NoSuchFieldException();
+            }
+        }
+        else  {
+            Field field = somePageObject.getClass().getDeclaredField(namePage);
+            field.setAccessible(true);
+            switch (namePage){
+                case "googlePage":
+                    return (GooglePage) field.get(somePageObject);
+                default: throw new NoSuchFieldException();
+            }
+        }
+   }
 
     @Override
     public RegisterPage getNativeRegisterPage(String name) throws NoSuchFieldException, IllegalAccessException {
