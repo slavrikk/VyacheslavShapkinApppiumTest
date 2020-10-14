@@ -5,7 +5,7 @@
     <parameter name="deviceName" value=""/>
     <parameter name="device" value="Google Pixel 3"/>
     <parameter name="os_version" value="9.0"/>
-    <parameter name="app" value="bs://e4a31b08ecb4197cb582ae91a4647369ec15dd73"/>
+    <parameter name="app" value="EPAMTestApp.apk"/>
     <test name="Cloud Android Native tests">
         <groups>
             <run>

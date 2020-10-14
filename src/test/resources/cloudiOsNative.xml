@@ -5,7 +5,7 @@
     <parameter name="deviceName" value=""/>
     <parameter name="device" value="iPhone 11"/>
     <parameter name="os_version" value="13.0"/>
-    <parameter name="app" value=""/>
+    <parameter name="app" value="EPAMTestApp.ipa"/>
     <!--This test does not work due to some ios app native issue in browserstack.com -->
     <test name="Cloud iOs Native tests">
         <groups>

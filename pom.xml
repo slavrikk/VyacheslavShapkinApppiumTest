@@ -40,7 +40,12 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>https://vyacheslav130:${accesskey}@hub-cloud.browserstack.com/wd/hub</ts.appium>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <token>${env.TOKEN}</token>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <login>${env.LOGIN}</login>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <ts.appium>https://${login}:${token}@hub-cloud.browserstack.com/wd/hub</ts.appium>
                        <!-- <ts.appium>http://localhost:4723/wd/hub</ts.appium> -->
                     </systemPropertyVariables>
                 </configuration>
@@ -49,8 +54,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>

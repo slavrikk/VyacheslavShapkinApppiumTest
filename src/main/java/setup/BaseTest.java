@@ -11,9 +11,12 @@ import org.testng.annotations.Parameters;
 import pageObjects.PageObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+
+import static setup.GetAppAddress.*;
 
 public class BaseTest implements IDriver {
 
@@ -64,16 +67,18 @@ public class BaseTest implements IDriver {
   }
 
   private void setAppiumDriver(
-      String platformName, String deviceName, String browserName, String app, String device, String os_version, String realMobile) {
+      String platformName, String deviceName, String browserName, String app, String device, String os_version, String realMobile) throws IOException, InterruptedException {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     // mandatory Android capabilities
     capabilities.setCapability("platformName", platformName);
     capabilities.setCapability("deviceName", deviceName);
 
-    if (app.endsWith(".apk")) {
+    if (app.startsWith("./src")) {
       capabilities.setCapability("app", (new File(app)).getAbsolutePath());
-    } else if(!app.equals("")){
-      capabilities.setCapability("app", app);
+
+    } else if( !app.equals("") && !app.startsWith("./src")){
+      String appUrl = getAddress(app);
+      capabilities.setCapability("app", appUrl);
     }
     capabilities.setCapability("browserName", browserName);
     capabilities.setCapability("device", device);
@@ -82,7 +87,11 @@ public class BaseTest implements IDriver {
     capabilities.setCapability("chromedriverDisableBuildCheck", "true");
 
     try {
-        appiumDriver= new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
+        appiumDriver= new AppiumDriver(new URL("https://"
+                +System.getProperty("login")+":"
+                +System.getProperty("token")+
+                "@hub-cloud.browserstack.com/wd/hub"), capabilities);
+
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }
